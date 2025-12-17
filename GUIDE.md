@@ -105,7 +105,7 @@ wget -O <USER APPLICATION DIRECTORY>/iotc_relay_client.h https://raw.githubuserc
 
 Here is a basic Python script that can represent an existing user application:
 
-```
+```python
 import time
 import random
 import sys
@@ -138,7 +138,7 @@ if __name__ == "__main__":
 The first addition users need to make is importing the iotc_relay_client 
 module (from the location it was downloaded to), and then adding basic socket config:
 
-```
+```python
 # Add location of relay client module to path
 CLIENT_MODULE_PATH = "/home/weston/demo" 
 sys.path.insert(0, CLIENT_MODULE_PATH)
@@ -152,7 +152,7 @@ CLIENT_ID = "random_data_generator"
 The next addition is going to be a handler function for acting upon the received cloud commands from the server. A basic 
 version of this could be:
 
-```
+```python
 def handle_cloud_command(command_name, command_parameters): 
     print(f"Command received: {command_name}")
     
@@ -171,7 +171,7 @@ def handle_cloud_command(command_name, command_parameters):
 The final modifications are going to be in the main loop of the application to initialize connection and then utilize the 
 socket:
 
-```
+```python
 def main():
     # Initialize and start client
     client = IoTConnectRelayClient(
@@ -200,7 +200,7 @@ def main():
 
 Altogether, the /IOTCONNECT Relay-compatible version of the example script would be:
 
-```
+```python
 import time
 import random
 import sys
@@ -268,7 +268,7 @@ if __name__ == "__main__":
 ## C Applications
 
 Here is a basic C program that can represent an existing user application:
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -305,7 +305,7 @@ int main(void)
 ```
 
 The first addition users need to make is including the relay client header and adding basic configuration:
-```
+```c
 #include "iotc_relay_client.h"
 
 #define SOCKET_PATH "/tmp/iotconnect-relay.sock"
@@ -314,7 +314,7 @@ The first addition users need to make is including the relay client header and a
 
 The next addition is a handler function for acting upon received cloud commands from the server. A basic version of this 
 could be:
-```
+```c
 static void handle_cloud_command(
     const char *command_name,
     const char *command_parameters,
@@ -341,7 +341,7 @@ static void handle_cloud_command(
 > (space-separated parameters string), and `user_data` (optional user context pointer which can be NULL).
 
 The final modifications are in the main function to add signal handling, initialize the client connection, and send telemetry:
-```
+```c
 static IotcRelayClient *g_client = NULL;
 
 static void signal_handler(int signum)
@@ -401,7 +401,7 @@ int main(void)
 ```
 
 Altogether, the /IOTCONNECT Relay-compatible version of the example program would be:
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -617,7 +617,9 @@ Here is an example service file that will work on Linux devices with a `weston` 
 
 > [!NOTE]
 > Directly download this service file to the correct directory of your device by executing this command:
-> ```sudo wget -O /etc/systemd/system/iotconnect-relay.service https://raw.githubusercontent.com/avnet-iotconnect/iotconnect-relay-service/main/service-file/iotconnect-relay.service```
+> ```
+> sudo wget -O /etc/systemd/system/iotconnect-relay.service https://raw.githubusercontent.com/avnet-iotconnect/iotconnect-relay-service/main/service-file/iotconnect-relay.service
+> ```
 
 ```
 [Unit]
@@ -662,28 +664,44 @@ sudo systemctl start iotconnect-relay.service
 > Relay Service:
 > 
 > Check if the service is running
-> ```sudo systemctl status iotconnect-relay.service```
+> ```
+> sudo systemctl status iotconnect-relay.service
+> ```
 >
 > View live logs
-> ```sudo journalctl -u iotconnect-relay.service -f```
+> ```
+> sudo journalctl -u iotconnect-relay.service -f
+> ```
 >
 > View recent logs
-> ```sudo journalctl -u iotconnect-relay.service -n 50```
+> ```
+> sudo journalctl -u iotconnect-relay.service -n 50
+> ```
 > 
 > Stop the service
-> ```sudo systemctl stop iotconnect-relay.service```
+> ```
+> sudo systemctl stop iotconnect-relay.service
+> ```
 >
 > Restart the service
-> ```sudo systemctl restart iotconnect-relay.service```
+> ```
+> sudo systemctl restart iotconnect-relay.service
+> ```
 >
 > Disable auto-start on boot
-> ```sudo systemctl disable iotconnect-relay.service```
+> ```
+> sudo systemctl disable iotconnect-relay.service
+> ```
 > 
 > View all logs
-> ```sudo journalctl -u iotconnect-relay.service```
+> ```
+> sudo journalctl -u iotconnect-relay.service
+> ```
 >
 > Clear old logs
-> ```sudo journalctl --vacuum-time=7d```
+> ```
+> sudo journalctl --vacuum-time=7d
+> ```
 
 
 # 7. Using the /IOTCONNECT Relay Service with User Applications
